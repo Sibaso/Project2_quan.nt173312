@@ -1,5 +1,4 @@
-from google.colab import drive
-drive.mount('/content/drive',force_remount=True)
+
 from collections import defaultdict
 import numpy as np
 
@@ -42,9 +41,9 @@ class Kmeans:
 				rd[index]=tfidf
 			return np.array(rd)
 
-		with open(data_path,encoding='latin1') as f:
+		with open(data_path) as f:
 			lines=f.read().splitlines()
-		with open('/content/drive/My Drive/Data_Colab/words_idf.txt',encoding='latin1') as f:
+		with open("C:\\Users\\pl\\Documents\\Python_Project\\ML_DS_2020\\session_1\\TF_IDF\\words_idf.txt") as f:
 			self.vocab_size=len(f.read().splitlines())
 
 		self.data=[]
@@ -58,7 +57,7 @@ class Kmeans:
 
 	#khoi tao tam cum
 	def random_init(self,seed_value): 
-		#np.random.seed(seed_value)
+		np.random.seed(seed_value)
 		samples=np.random.choice(len(self.data),self.num_clusters,replace=False)
 		for index,cluster in enumerate(self.clusters):
 			cluster.centroid=self.data[samples[index]].rd
@@ -156,7 +155,7 @@ class Kmeans:
 		return I_value*2/(H_omega+H_C)
 
 km=Kmeans(20)
-km.load_data('/content/drive/My Drive/Data_Colab/train_tf_idf_vector.txt')
+km.load_data("C:\\Users\\pl\\Documents\\Python_Project\\ML_DS_2020\\session_1\\TF_IDF\\train_tf_idf_vector.txt")
 km.run(2020,'centroid',0)
 print('iteration',km.iteration)
 print('purity',km.compute_purity())
